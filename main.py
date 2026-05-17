@@ -17,18 +17,6 @@ def api_counties():
 
     return jsonify(counties)
 
-@app.route("/api/data/six_counties")
-def api_six_counties():
-    six_counties = ["", "", "桃", "中", "南", ""]
-    fields, datas = database.get_latest_data()
-    result = {}
-    if datas:
-        df = pd.DataFrame(datas, columns=fields)
-        for county in six_counties:
-            avg = df[df["county"] == county]["pm25"].mean().round(2)
-        result[county] = avg
-    return jsonify(result)
-
 @app.route("/")
 def index():
 
